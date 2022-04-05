@@ -9,7 +9,7 @@ export default function useAuth(code) {
   // send access token request to server
   useEffect(() => {
     axios
-      .post("http://localhost:3001/login", {
+      .post(`${process.env.REACT_APP_BASE_URL}/login`, {
         code, // pass code through to express to spotify API
       })
       .then((res) => {
@@ -28,7 +28,7 @@ export default function useAuth(code) {
     if (!refreshToken || !expiresIn) return;
     const interval = setInterval(() => {
       axios
-        .post("http://localhost:3001/refresh", {
+        .post(`${process.env.REACT_APP_BASE_URL}/refresh`, {
           refreshToken,
         })
         .then((res) => {
