@@ -5,11 +5,11 @@ export default function useAuth(code) {
   const [accessToken, setAccessToken] = useState("");
   const [refreshToken, setRefreshToken] = useState("");
   const [expiresIn, setExpiresIn] = useState("");
-
+  const baseUrl = process.env.REACT_APP_BASE_URL || "http://localhost:3001";
   // send access token request to server.js
   useEffect(() => {
     axios
-      .post("https://spotify-tim.herokuapp.com/login", {
+      .post(`${baseUrl}/login`, {
         code, // pass code through to express to spotify API
       })
       .then((res) => {
@@ -29,7 +29,7 @@ export default function useAuth(code) {
     if (!refreshToken || !expiresIn) return;
     const interval = setInterval(() => {
       axios
-        .post("https://spotify-tim.herokuapp.com/refresh", {
+        .post(`${baseUrl}/refresh`, {
           refreshToken,
         })
         .then((res) => {

@@ -259,6 +259,7 @@ export default function Dashboard({ code }) {
       <PlayerWrapper>
         <Player accessToken={accessToken} trackUri={playingTrack?.uri} />
       </PlayerWrapper>
+      {console.log("base url:", process.env.REACT_APP_BASE_URL)}
     </div>
   );
 }

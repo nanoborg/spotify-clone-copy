@@ -6,23 +6,26 @@ const dotenv = require("dotenv");
 const path = require("path");
 
 dotenv.config();
-
 const port = process.env.PORT || 3001;
+const baseUrl = process.env.REACT_APP_BASE_URL || "http://localhost:3000";
 
 const app = express();
 app.use(cors());
 app.use(bodyParser.json());
 
-app.use(express.static(path.join(__dirname, "./build")));
+if (process.env.NODE_ENV === "production") {
+  app.use(express.static(path.join(__dirname, "./build")));
 
-app.get("/", (req, res) => res.sendFile(path.join(__dirname, "index.html")));
+  app.get("/", (req, res) => res.sendFile(path.join(__dirname, "index.html")));
+} else {
+}
 
 // refresh access token every 59 mins / 1 min before expiry
 app.post("/refresh", (req, res) => {
   const refreshToken = req.body.refreshToken;
   const spotifyApi = new SpotifyWebApi({
     // set spotify API node data
-    redirectUri: "https://spotify-tim.herokuapp.com/",
+    redirectUri: `${baseUrl}`,
     clientId: process.env.REACT_APP_CLIENT_ID,
     clientSecret: process.env.REACT_APP_SECRET,
     refreshToken, // insert refresh token from useAuth
@@ -49,7 +52,7 @@ app.post("/login", (req, res) => {
   const code = req.body.code;
   const spotifyApi = new SpotifyWebApi({
     // set spotify API node data
-    redirectUri: "https://spotify-tim.herokuapp.com/",
+    redirectUri: `${baseUrl}`,
     clientId: process.env.REACT_APP_CLIENT_ID,
     clientSecret: process.env.REACT_APP_SECRET,
   });
