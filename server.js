@@ -22,7 +22,7 @@ app.post("/refresh", (req, res) => {
   const refreshToken = req.body.refreshToken;
   const spotifyApi = new SpotifyWebApi({
     // set spotify API node data
-    redirectUri: "http://localhost:3001",
+    redirectUri: "https://spotify-tim.herokuapp.com/",
     clientId: process.env.REACT_APP_CLIENT_ID,
     clientSecret: process.env.REACT_APP_SECRET,
     refreshToken, // insert refresh token from useAuth
@@ -49,7 +49,7 @@ app.post("/login", (req, res) => {
   const code = req.body.code;
   const spotifyApi = new SpotifyWebApi({
     // set spotify API node data
-    redirectUri: "http://localhost:3001",
+    redirectUri: "https://spotify-tim.herokuapp.com/",
     clientId: process.env.REACT_APP_CLIENT_ID,
     clientSecret: process.env.REACT_APP_SECRET,
   });
