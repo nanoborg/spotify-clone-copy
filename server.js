@@ -14,14 +14,12 @@ const app = express();
 app.use(cors());
 app.use(bodyParser.json());
 
-// if (production === "production") {
-//   app.use(express.static(path.join(__dirname, "./build")));
+if (production === "production") {
+  app.use(express.static(path.join(__dirname, "./build")));
 
-//   app.get("/", (req, res) => res.sendFile(path.join(__dirname, "index.html")));
-// }
-app.use(express.static(path.join(__dirname, "./build")));
+  app.get("/", (req, res) => res.sendFile(path.join(__dirname, "index.html")));
+}
 
-app.get("/", (req, res) => res.sendFile(path.join(__dirname, "index.html")));
 // refresh access token every 59 mins / 1 min before expiry
 app.post("/refresh", (req, res) => {
   const refreshToken = req.body.refreshToken;
