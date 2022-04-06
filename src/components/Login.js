@@ -12,7 +12,12 @@ export default function Login() {
         src="https://getheavy.com/wp-content/uploads/2019/12/spotify2019-830x350.jpg"
         alt="spotify logo"
       ></S.StyledImage>
-      {console.log("node_env:", process.env.NODE_ENV)}
+      {console.log(
+        "node_env:",
+        process.env.NODE_ENV,
+        "base_url:",
+        process.env.REACT_APP_BASE_URL
+      )}
       <S.StyledA href={AUTH_URL}>LOGIN TO SPOTIFY</S.StyledA>
     </S.LoginPage>
   );
