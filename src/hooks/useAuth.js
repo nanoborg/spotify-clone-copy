@@ -9,7 +9,7 @@ export default function useAuth(code) {
   // send access token request to server
   useEffect(() => {
     axios
-      .post(`${process.env.REACT_APP_BASE_URL}/login`, {
+      .post("http://localhost:3001/login", {
         code, // pass code through to express to spotify API
       })
       .then((res) => {
@@ -24,11 +24,12 @@ export default function useAuth(code) {
       });
   }, [code]);
 
+  // refresh token 1 minute before expiry
   useEffect(() => {
     if (!refreshToken || !expiresIn) return;
     const interval = setInterval(() => {
       axios
-        .post(`${process.env.REACT_APP_BASE_URL}/refresh`, {
+        .post("http://localhost:3001/refresh", {
           refreshToken,
         })
         .then((res) => {
@@ -36,12 +37,15 @@ export default function useAuth(code) {
           setExpiresIn(res.data.expiresIn);
         })
         .catch(() => {
+          // issue redirect to home
           window.location = "/";
         });
+      // expires in 3600s - 1s (converted to milliseconds)
     }, (expiresIn - 60) * 1000);
 
     return () => clearInterval(interval);
   }, [refreshToken, expiresIn]);
 
+  // return accessToken to Dashboard
   return accessToken;
 }

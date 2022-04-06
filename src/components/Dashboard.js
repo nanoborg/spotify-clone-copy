@@ -58,7 +58,6 @@ export default function Dashboard({ code }) {
   }, [accessToken]);
 
   // get user info
-  // display_name, images[0].url
   useEffect(() => {
     if (!accessToken) return;
     spotifyApi.getMe().then(

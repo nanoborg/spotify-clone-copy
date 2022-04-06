@@ -17,11 +17,12 @@ app.use(express.static(path.join(__dirname, "./build")));
 
 app.get("/", (req, res) => res.sendFile(path.join(__dirname, "index.html")));
 
+// refresh access token every 59 mins / 1 min before expiry
 app.post("/refresh", (req, res) => {
   const refreshToken = req.body.refreshToken;
   const spotifyApi = new SpotifyWebApi({
     // set spotify API node data
-    redirectUri: process.env.REACT_APP_BASE_URL,
+    redirectUri: "http://localhost:3001",
     clientId: process.env.REACT_APP_CLIENT_ID,
     clientSecret: process.env.REACT_APP_SECRET,
     refreshToken, // insert refresh token from useAuth
@@ -31,8 +32,6 @@ app.post("/refresh", (req, res) => {
   spotifyApi
     .refreshAccessToken()
     .then((data) => {
-      console.log("server / token refresh:", data);
-      console.log("server / token refresh response:", res);
       res.json({
         // send JSON object back to useAuth
         accessToken: data.body.access_token,
@@ -46,11 +45,11 @@ app.post("/refresh", (req, res) => {
 
 // send code request to spotify API for token
 app.post("/login", (req, res) => {
-  console.log("server code:", req.body.code);
+  // console.log("server code:", req.body.code);
   const code = req.body.code;
   const spotifyApi = new SpotifyWebApi({
     // set spotify API node data
-    redirectUri: process.env.REACT_APP_BASE_URL,
+    redirectUri: "http://localhost:3001",
     clientId: process.env.REACT_APP_CLIENT_ID,
     clientSecret: process.env.REACT_APP_SECRET,
   });
@@ -71,4 +70,5 @@ app.post("/login", (req, res) => {
     });
 });
 
-app.listen(port);
+app.listen(port, () => console.log(`Listening on port ${port}`));
+module.exports = app;
