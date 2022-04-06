@@ -11,8 +11,7 @@ export default function Login() {
         alt="spotify logo"
       ></S.StyledImage>
       {console.log("auth url:", AUTH_URL)}
-      <div>asdfasdfsdf</div>
-      <S.StyledA href={AUTH_URL}>LOGIN TO SPOTIFY sdfsdf</S.StyledA>
+      <S.StyledA href={AUTH_URL}>LOGIN TO SPOTIFY</S.StyledA>
     </S.LoginPage>
   );
 }
