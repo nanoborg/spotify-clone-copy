@@ -17,7 +17,6 @@ if (process.env.NODE_ENV === "production") {
   app.use(express.static(path.join(__dirname, "./build")));
 
   app.get("/", (req, res) => res.sendFile(path.join(__dirname, "index.html")));
-} else {
 }
 
 // refresh access token every 59 mins / 1 min before expiry
