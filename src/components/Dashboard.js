@@ -48,7 +48,6 @@ export default function Dashboard({ code }) {
     if (!accessToken) return;
     spotifyApi.getUserPlaylists().then(
       (data) => {
-        console.log("Retrieved playlists", data.body.items);
         setUserPlayLists(data.body.items);
       },
       (err) => {
@@ -77,7 +76,6 @@ export default function Dashboard({ code }) {
   // handle active Icon
   const setActiveIcon = (icon) => {
     if (icon === "home") {
-      console.log("home");
       setIsActive({
         home: true,
         search: false,
@@ -259,7 +257,6 @@ export default function Dashboard({ code }) {
       <PlayerWrapper>
         <Player accessToken={accessToken} trackUri={playingTrack?.uri} />
       </PlayerWrapper>
-      {console.log("base url:", process.env.REACT_APP_BASE_URL)}
     </div>
   );
 }

@@ -17,7 +17,6 @@ export default function useAuth(code) {
         setRefreshToken(res.data.refreshToken);
         setExpiresIn(res.data.expiresIn);
         window.history.pushState({}, null, "/");
-        console.log("refresh token:", res);
       })
       .catch((error) => {
         console.log("useAuth, token request:", error);
