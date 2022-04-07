@@ -13,6 +13,7 @@ export default function Login() {
         alt="spotify logo"
       ></S.StyledImage>
       <S.StyledA href={AUTH_URL}>LOGIN TO SPOTIFY</S.StyledA>
+      {console.log(baseUrl)}
     </S.LoginPage>
   );
 }
