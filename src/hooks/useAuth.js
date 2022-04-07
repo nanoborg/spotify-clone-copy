@@ -5,7 +5,7 @@ export default function useAuth(code) {
   const [accessToken, setAccessToken] = useState("");
   const [refreshToken, setRefreshToken] = useState("");
   const [expiresIn, setExpiresIn] = useState("");
-  const baseUrl = process.env.BASE_URL || "http://localhost:3001";
+  const baseUrl = process.env.REACT_APP_BASE_URL || "http://localhost:3001";
   // send access token request to server.js
   useEffect(() => {
     axios
