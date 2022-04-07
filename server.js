@@ -7,7 +7,7 @@ const path = require("path");
 
 dotenv.config();
 const port = process.env.PORT || 3001;
-const baseUrl = process.env.REACT_APP_BASE_URL || "http://localhost:3000";
+const baseUrl = process.env.BASE_URL || "http://localhost:3000";
 const production = process.env.NODE_ENV;
 
 const app = express();
