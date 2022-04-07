@@ -44,7 +44,7 @@ export default function SearchContent({ setPlayingTrack, spotifyApi }) {
   };
 
   return (
-    <div>
+    <StyledSearchPage>
       <StyledSearchWrapper>
         <StyledSearchIcon />
         <StyledInput
@@ -55,7 +55,8 @@ export default function SearchContent({ setPlayingTrack, spotifyApi }) {
           // {accessToken}
         />
       </StyledSearchWrapper>
-      <div className="flex-grow-1 my-2" style={{ overFlowY: "auto" }}>
+      {/* <div className="flex-grow-1 my-2" style={{ overFlowY: "auto" }}> */}
+      <div>
         songs
         {searchResults.map((track) => {
           return (
@@ -67,7 +68,7 @@ export default function SearchContent({ setPlayingTrack, spotifyApi }) {
           );
         })}
       </div>
-    </div>
+    </StyledSearchPage>
   );
 }
 
@@ -77,6 +78,7 @@ const StyledSearchWrapper = styled.div`
   border-radius: 25px 25px;
   padding: 0.5em;
   margin: 1em;
+  width: 300px;
 `;
 
 const StyledInput = styled.input`
@@ -86,4 +88,8 @@ const StyledInput = styled.input`
 
 const StyledSearchIcon = styled(SearchIcon)`
   color: black;
+`;
+
+const StyledSearchPage = styled.div`
+  width: 100vw;
 `;

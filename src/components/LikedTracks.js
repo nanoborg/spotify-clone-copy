@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import TrackSearchResult from "./TrackSearchResult";
 import styled from "styled-components";
+import UserDisplay from "./UserDisplay";
 
 export default function LikedTracks({ spotifyApi, setPlayingTrack, userInfo }) {
   const [likedTracks, setLikedTracks] = useState([]);
@@ -45,12 +46,7 @@ export default function LikedTracks({ spotifyApi, setPlayingTrack, userInfo }) {
 
   return (
     <RootDisplay>
-      <UserBanner>
-        <UserInfo>
-          <StyledUserImage src={userInfo.image} alt="" />
-          <UserName>{userInfo.name}</UserName>
-        </UserInfo>
-      </UserBanner>
+      <UserDisplay userInfo={userInfo} />
       <StyledHeader>
         <img
           aria-hidden="false"
@@ -58,29 +54,32 @@ export default function LikedTracks({ spotifyApi, setPlayingTrack, userInfo }) {
           loading="eager"
           src="https://t.scdn.co/images/3099b3803ad9496896c43f22fe9be8c4.png"
           alt="Liked Songs"
-          class="mMx2LUixlnN_Fu45JpFB CmkY1Ag0tJDfnFXbGgju _EShSNaBK1wUIaZQFJJQ"
+          className="mMx2LUixlnN_Fu45JpFB CmkY1Ag0tJDfnFXbGgju _EShSNaBK1wUIaZQFJJQ"
           srcset="https://t.scdn.co/images/3099b3803ad9496896c43f22fe9be8c4.png 150w, https://t.scdn.co/images/3099b3803ad9496896c43f22fe9be8c4.png 300w"
           sizes="(min-width: 1280px) 232px, 192px"
+          style={{ boxShadow: "0 4px 60px rgb(0 0 0 / 50%)" }}
         ></img>
         <StyledRightSideHeader>
           <div></div>
           <StyledTitles>
             <h3 style={{ fontSize: ".6em" }}>PLAYLIST</h3>
             <StyledLikedH1>Liked Songs</StyledLikedH1>
-            <h3 style={{ fontSize: ".6em" }}>User Info</h3>
+            <h3 style={{ fontSize: ".6em" }}>{userInfo.name}</h3>
           </StyledTitles>
         </StyledRightSideHeader>
       </StyledHeader>
 
-      {likedTracks.map((track) => {
-        return (
-          <TrackSearchResult
-            key={track.uri}
-            track={track}
-            chooseTrack={chooseTrack}
-          />
-        );
-      })}
+      <StyledTrackBackground>
+        {likedTracks.map((track) => {
+          return (
+            <TrackSearchResult
+              key={track.uri}
+              track={track}
+              chooseTrack={chooseTrack}
+            />
+          );
+        })}
+      </StyledTrackBackground>
     </RootDisplay>
   );
 }
@@ -113,33 +112,23 @@ const StyledLikedH1 = styled.h1`
   font-weight: 800;
 `;
 
-const UserBanner = styled.div`
-  display: flex;
-`;
-
-const UserInfo = styled.div`
-  background-color: rgba(0, 0, 0, 0.5);
-  width: 166px;
-  display: flex;
-  justify-content: space-evenly;
-  align-items: center;
-  border-radius: 25px;
-`;
-
 const RootDisplay = styled.div`
-  width: 100%;
-  background-color: #c32a30;
-  background-image: linear-gradient(180deg, #c32a30 0%, #000000 30%);
+  width: 100vw;
+  background-color: #4f389a;
+  background-image: linear-gradient(180deg, #4f389a 0%, #291e51 94%);
+
+  overflow-y: auto;
 `;
 
-const StyledUserImage = styled.img`
-margin: 0
-  height: 24px;
-  width: 24px;
-  border-radius: 50%;
+const StyledTrackBackground = styled.div`
+  background-color: rgba(0, 0, 0, 0.2);
+  background-image: linear-gradient(
+    180deg,
+    rgba(0, 0, 0, 0.2) 0%,
+    rgba(0, 0, 0, 1) 30%
+  );
 `;
 
-const UserName = styled.span`
-  font-size: 0.8rem;
-  margin: 0;
+const StyledImage = styled.div`
+  // box-shadow: 0 4px 60px rgb(0 0 0 / 50%);
 `;

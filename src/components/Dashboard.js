@@ -178,7 +178,7 @@ export default function Dashboard({ code }) {
                 {isActive.liked ? (
                   <LikedIcon>
                     <LikedBackground>
-                      <StyledActiveSvg
+                      <StyledHeartActiveSvg
                         role="img"
                         height="12"
                         width="12"
@@ -188,13 +188,13 @@ export default function Dashboard({ code }) {
                         fill="white"
                       >
                         <path d="M15.724 4.22A4.313 4.313 0 0012.192.814a4.269 4.269 0 00-3.622 1.13.837.837 0 01-1.14 0 4.272 4.272 0 00-6.21 5.855l5.916 7.05a1.128 1.128 0 001.727 0l5.916-7.05a4.228 4.228 0 00.945-3.577z"></path>
-                      </StyledActiveSvg>
+                      </StyledHeartActiveSvg>
                     </LikedBackground>
                   </LikedIcon>
                 ) : (
                   <LikedIcon>
                     <LikedBackground>
-                      <StyledSvg
+                      <StyledHeartSvg
                         role="img"
                         height="12"
                         width="12"
@@ -203,7 +203,7 @@ export default function Dashboard({ code }) {
                         className="Svg-sc-1bi12j5-0 jgfuCe not-active"
                       >
                         <path d="M15.724 4.22A4.313 4.313 0 0012.192.814a4.269 4.269 0 00-3.622 1.13.837.837 0 01-1.14 0 4.272 4.272 0 00-6.21 5.855l5.916 7.05a1.128 1.128 0 001.727 0l5.916-7.05a4.228 4.228 0 00.945-3.577z"></path>
-                      </StyledSvg>
+                      </StyledHeartSvg>
                     </LikedBackground>
                   </LikedIcon>
                 )}
@@ -218,13 +218,22 @@ export default function Dashboard({ code }) {
             />
           </SideBarWrap>
           <Routes>
-            <Route path="/" element={<HomeContent />} />
+            <Route
+              path="/"
+              element={
+                <HomeContent
+                  userInfo={userInfo}
+                  setActiveIcon={setActiveIcon}
+                />
+              }
+            />
             <Route
               path="/search"
               element={
                 <SearchContent
                   spotifyApi={spotifyApi}
                   setPlayingTrack={setPlayingTrack}
+                  userInfo={userInfo}
                 />
               }
               s
@@ -237,6 +246,7 @@ export default function Dashboard({ code }) {
                   spotifyApi={spotifyApi}
                   setPlayingTrack={setPlayingTrack}
                   currentPlayListName={currentPlayListName}
+                  userInfo={userInfo}
                 />
               }
             />
@@ -262,6 +272,8 @@ export default function Dashboard({ code }) {
 }
 
 const BodyWrapper = styled.div`
+  margin: 0px 0px;
+  height: 100vh;
   display: flex;
   background-color: black;
   color: rgb(179, 179, 179);
@@ -293,23 +305,36 @@ const StyledBanner = styled.svg`
 `;
 
 const StyledSvg = styled.svg`
-  transition: 0.3s;
+  transition: 0.2s;
+  fill: rgb(179, 179, 179);
+  margin: 0.3em 0;
+  margin-right: 1em;
+`;
+
+const StyledHeartSvg = styled.svg`
+  transition: 0.2s;
   fill: rgb(179, 179, 179);
 `;
 
 const StyledActiveSvg = styled.svg`
   fill: white;
+  margin: 0.3em 0;
+  margin-right: 1em;
 `;
 
 const StyledLink = styled(NavLink)`
   text-decoration: none;
-  transition: 0.3s;
+  transition: 0.2s;
   color: ${(props) => (props.isActive ? "white" : "rgb(179, 179, 179)")};
   &:hover ${StyledSvg} {
     fill: white;
   }
   &:hover {
     color: white;
+  }
+
+  &:hover ${StyledHeartSvg} {
+    fill: white;
   }
 `;
 
@@ -330,4 +355,8 @@ const LikedBackground = styled.div`
 
 const LikedIcon = styled.div`
   display: inline-block;
+  margin: 0.3em 0;
+  margin-right: 1em;
 `;
+
+const StyledHeartActiveSvg = styled.svg``;

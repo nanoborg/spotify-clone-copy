@@ -27,6 +27,7 @@ const TrackWrapper = styled.div`
   align-items: center;
   cursor: pointer;
   background-color: rgba(0, 0, 0, 0.2);
+
   &:hover {
     background-color: rgba(42, 42, 42, 0.8);
   }
