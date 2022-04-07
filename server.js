@@ -31,7 +31,7 @@ app.post("/refresh", (req, res) => {
     refreshToken, // insert refresh token from useAuth
   });
 
-  // call spotify API
+  // call spotify API to refresh token
   spotifyApi
     .refreshAccessToken()
     .then((data) => {
